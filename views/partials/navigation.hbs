@@ -1,0 +1,13 @@
+<nav>
+  {{#if user}}
+    <span>Welcome {{user.fullName}}</span>
+    <form method="POST" action="/logout" style="display:inline">
+      <button type="submit">Logout</button>
+    </form>
+  {{else}}
+    <a href="/signup">Signup</a>
+    <a href="/login">Login</a>
+  {{/if}}
+  <a href="/rooms">Rooms</a>
+</nav>
+<hr />

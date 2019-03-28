@@ -1,0 +1,10 @@
+{{! Signup form allowing users to create an account }}
+{{#if errorMessage}}
+<p style="color:red">{{errorMessage}}</p>
+{{/if}}
+<form method="POST" action="/signup">
+  <label>Email: <input type="email" name="email" /></label><br />
+  <label>Password: <input type="password" name="password" /></label><br />
+  <label>Full name: <input type="text" name="fullName" /></label><br />
+  <button type="submit">Create account</button>
+</form>

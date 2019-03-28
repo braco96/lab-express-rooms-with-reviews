@@ -1,0 +1,7 @@
+{{! Form to edit an existing room }}
+<form method="POST" action="/rooms/{{room._id}}/edit">
+  <label>Name: <input type="text" name="name" value="{{room.name}}" /></label><br />
+  <label>Description: <textarea name="description">{{room.description}}</textarea></label><br />
+  <label>Image URL: <input type="text" name="imageUrl" value="{{room.imageUrl}}" /></label><br />
+  <button type="submit">Update</button>
+</form>

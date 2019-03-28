@@ -1,0 +1,42 @@
+{{! List of all rooms }}
+<h1>Rooms</h1>
+{{#if user}}
+  <a href="/rooms/create">Create new room</a>
+{{/if}}
+<ul>
+  {{#each rooms}}
+    <li>
+      <h2>{{this.name}}</h2>
+      <p>{{this.description}}</p>
+      {{#if this.imageUrl}}
+        <img src="{{this.imageUrl}}" alt="{{this.name}}" style="max-width:200px" />
+      {{/if}}
+      <p>Owner: {{this.owner.fullName}}</p>
+
+      {{! Show edit/delete options only to owner }}
+      {{#ifCond this.owner._id ../user._id}}
+        <a href="/rooms/{{this._id}}/edit">Edit</a>
+        <form method="POST" action="/rooms/{{this._id}}/delete" style="display:inline">
+          <button type="submit">Delete</button>
+        </form>
+      {{/ifCond}}
+
+      <h3>Reviews</h3>
+      <ul>
+        {{#each this.reviews}}
+          <li>{{this.comment}} - <em>{{this.user.fullName}}</em></li>
+        {{/each}}
+      </ul>
+
+      {{! Review form for logged users who are not owners }}
+      {{#if ../user}}
+        {{#unless (eq this.owner._id ../user._id)}}
+          <form method="POST" action="/reviews/create/{{this._id}}">
+            <input type="text" name="comment" placeholder="Your review" />
+            <button type="submit">Add review</button>
+          </form>
+        {{/unless}}
+      {{/if}}
+    </li>
+  {{/each}}
+</ul>
